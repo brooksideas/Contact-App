@@ -3,11 +3,37 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 const store = new Vuex.Store({
     state: {
-      email: '',
-      firstName: '',
-      lastName: '',
+      email: 'someone@gmail.com',
+      firstName: 'First Name',
+      lastName: 'Last Name',
+      jobTitle: 'Job Title',
+      bio: 'Biography',
+    },
+    getters:{ 
+      initialValues: (state) => { 
+        console.log('initialValues', state);
+
+       if(state.email == ''){ 
+           var email = 'someone@gmail.com'
+          return store.dispatch('setInitialValue', email)
+       }
+      }
     },
     mutations: {
+      mutateInitialValue (state, value) {
+        console.log('mutat', value);
+        state.email = value;
+      },
+      mutateEmailValue(state, value){
+        console.log('EMAL MUTAY =>', value);
+        state.email = value;
+      },
+      mutateJobValue(state, value){ 
+        state.jobTitle = value;
+      },
+      mutateBioValue(state, value){ 
+        state.bio = value;
+      },
       loggedInValue (state, value) {
         // mutate state
         console.log('mutat =>', value);
@@ -22,7 +48,24 @@ const store = new Vuex.Store({
         loggedInAction ({commit}, {payload}) {
             console.log('Actions =>', payload);
           commit('loggedInValue', payload)
+        },
+        setInitialValue ({commit}, value) { 
+          commit('mutateInitialValue', value)
+        },
+        changeEmailAddress({commit} , value) {
+        console.log('Change Action', value);
+        if(value === ''){
+        return  commit('mutateInitialValue', 'someone@gmail.com')
         }
+          commit('mutateEmailValue', value)
+        },
+        changeJobTitle({commit} , value) { 
+            commit('mutateJobValue', value)
+          },
+
+        changeBio({commit} , value) { 
+            commit('mutateBioValue', value)
+          }
       }
   })
 
