@@ -28,6 +28,13 @@ const store = new Vuex.Store({
         console.log('EMAL MUTAY =>', value);
         state.email = value;
       },
+      mutateFirstNameValue(state, value){
+        console.log('First MUTAY =>', value);
+        state.firstName = value;
+      },
+      mutateLastNameValue(state, value){ 
+        state.lastName = value;
+      },
       mutateJobValue(state, value){ 
         state.jobTitle = value;
       },
@@ -59,6 +66,12 @@ const store = new Vuex.Store({
         }
           commit('mutateEmailValue', value)
         },
+        changeFirstName({commit}, value){
+          return commit('mutateFirstNameValue', value);
+        },
+        changeLastName({commit}, value){
+          return commit('mutateLastNameValue', value);
+        },
         changeJobTitle({commit} , value) { 
             commit('mutateJobValue', value)
           },
@@ -67,6 +80,6 @@ const store = new Vuex.Store({
             commit('mutateBioValue', value)
           }
       }
-  })
+  }) 
 
   export default store;
